@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Solutions — IQuro Cloud</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.solutions-body { background: var(--bg); }
+.sol-block { padding: 96px 48px; border-bottom: 1px solid var(--border); }
+.sol-block:nth-child(even) { background: var(--bg1); }
+.sol-inner { max-width: 1100px; margin: 0 auto; }
+.sol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; margin-top: 52px; }
+.sol-grid.rev { direction: rtl; }
+.sol-grid.rev > * { direction: ltr; }
+
+.sol-num {
+  font-size: clamp(6rem,10vw,12rem); font-weight: 700;
+  color: rgba(99,102,241,0.04); line-height: 1; letter-spacing: -0.05em;
+  position: absolute; top: 32px; right: 40px; pointer-events: none; user-select: none;
+}
+.sol-block { position: relative; overflow: hidden; }
+
+.svc-list { display: flex; flex-direction: column; gap: 2px; }
+.svc-row {
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 22px 24px; border-left: 2px solid transparent;
+  transition: border-left-color 0.2s, background 0.2s;
+}
+.svc-row:hover { border-left-color: var(--indigo); background: var(--bg3); }
+.svc-row-h { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+.svc-row-h::before { content:'›'; color:var(--indigo); font-size:1rem; }
+.svc-row p { font-size: 0.82rem; color: var(--text-2); line-height: 1.7; font-weight: 300; }
+
+.sol-intro p { font-size: 0.97rem; color: var(--text-2); line-height: 1.85; margin-bottom: 18px; font-weight: 300; }
+.sol-intro p strong { color: var(--text-1); font-weight: 500; }
+.tech-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 28px; }
+.tech-chip { font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 11px; border-radius: 4px; border: 1px solid var(--border); color: var(--text-3); transition: border-color 0.2s, color 0.2s; }
+.tech-chip:hover { border-color: var(--indigo); color: var(--indigo); }
+.sol-cta { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+@media(max-width:1024px){ .sol-block { padding: 72px 28px; } .sol-grid { grid-template-columns:1fr; gap:40px; } .sol-grid.rev { direction:ltr; } }
+@media(max-width:640px){ .sol-block { padding: 56px 20px; } }
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="2.5" height="12" rx="1.25" fill="white"/><circle cx="4.25" cy="9" r="1.8" fill="var(--indigo)"/><circle cx="12" cy="9" r="5.5" stroke="white" stroke-width="2"/><line x1="15.5" y1="13" x2="17.5" y2="15.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    IQuro Cloud
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="about.html">About</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="products.html">Products</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-signin">Sign in</a>
+    <a href="contact.html" class="btn btn-primary btn-sm">Start a Project</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav"><button class="mob-close" onclick="closeMob()">✕</button><a href="about.html" onclick="closeMob()">About</a><a href="solutions.html" onclick="closeMob()">Solutions</a><a href="products.html" onclick="closeMob()">Products</a><a href="pricing.html" onclick="closeMob()">Pricing</a><a href="contact.html" onclick="closeMob()">Contact</a><a href="contact.html" class="btn btn-primary mob-btn">Start a Project</a></div>
+
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-crumb">Solutions</div>
+    <h1 class="page-hero-h">Built for<br><em>real production</em><br>load.</h1>
+    <p class="page-hero-p">Three service pillars, one complete delivery chain. From product engineering to cloud infrastructure to DevOps automation — IQuro Cloud owns every layer.</p>
+  </div>
+</header>
+
+<div class="solutions-body">
+
+  <section class="sol-block" id="engineering">
+    <div class="sol-num">01</div>
+    <div class="sol-inner">
+      <div class="label reveal">Pillar One</div>
+      <h2 class="sh reveal">Product <em>Engineering</em></h2>
+      <p class="sp reveal">We don't build websites. We engineer enterprise-grade web applications — designed to scale, perform, and outlast the trends they were built during.</p>
+      <div class="sol-grid">
+        <div class="sol-intro reveal">
+          <p>Most agencies hand your project to a junior with a template. IQuro Cloud architects from first principles — production performance and operational simplicity as primary design constraints, not afterthoughts.</p>
+          <p>We work in <strong>any language your stack requires</strong>: React and Next.js for modern frontends, Java and Spring Boot for enterprise APIs, Python for data-heavy workloads, Go for high-performance services. Right tool, right problem.</p>
+          <div class="tech-row"><span class="tech-chip">React.js</span><span class="tech-chip">Next.js</span><span class="tech-chip">Vue.js</span><span class="tech-chip">TypeScript</span><span class="tech-chip">Node.js</span><span class="tech-chip">Python</span><span class="tech-chip">Java / Spring Boot</span><span class="tech-chip">Go</span><span class="tech-chip">PHP / Laravel</span><span class="tech-chip">PostgreSQL</span><span class="tech-chip">MongoDB</span><span class="tech-chip">Redis</span></div>
+          <div class="sol-cta"><a href="contact.html" class="btn btn-primary">Start an Engineering Project</a></div>
+        </div>
+        <div class="svc-list reveal rd1">
+          <div class="svc-row"><div class="svc-row-h">Custom Full-Stack Applications</div><p>End-to-end web application development — frontend, backend, API, and database — in one coherent delivery. No silos, no handoffs, no integration surprises.</p></div>
+          <div class="svc-row"><div class="svc-row-h">React / Next.js Frontend</div><p>Server-side rendered, SEO-optimized React applications. Built for Core Web Vitals, not just Lighthouse scores.</p></div>
+          <div class="svc-row"><div class="svc-row-h">Scalable Backend APIs</div><p>REST and GraphQL APIs designed for horizontal scale. Rate limiting, caching, async processing — built in from the start.</p></div>
+          <div class="svc-row"><div class="svc-row-h">Database Architecture</div><p>Schema design, indexing strategy, query optimization, and caching layers for both relational and document databases at enterprise data volumes.</p></div>
+          <div class="svc-row"><div class="svc-row-h">Legacy System Modernization</div><p>Incremental migration of legacy monoliths to modern architectures — without a big-bang rewrite that stops your business for six months.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sol-block" id="cloud">
+    <div class="sol-num">02</div>
+    <div class="sol-inner">
+      <div class="label reveal">Pillar Two</div>
+      <h2 class="sh reveal">Cloud <em>Architecture</em></h2>
+      <p class="sp reveal">Right-sized, cost-optimized infrastructure for zero downtime. We've built infrastructure that held under 300M+ daily requests. We know what production-grade means.</p>
+      <div class="sol-grid rev">
+        <div class="svc-list reveal">
+          <div class="svc-row"><div class="svc-row-h">Multi-Cloud Strategy &amp; Deployment</div><p>Workload placement across AWS, GCP, and Azure based on actual cost and performance profiles — not which cloud your last consultant preferred.</p></div>
+          <div class="svc-row"><div class="svc-row-h">Infrastructure-as-Code (Terraform)</div><p>Every resource provisioned as version-controlled code. Reproducible environments, auditable changes, rebuild your entire infrastructure in minutes.</p></div>
+          <div class="svc-row"><div class="svc-row-h">On-Premises to Cloud Migration</div><p>Containerizing legacy on-prem applications and migrating to cloud-native environments without downtime or data loss.</p></div>
+          <div class="svc-row"><div class="svc-row-h">Kubernetes Cluster Design</div><p>Production Kubernetes architecture — node sizing, network policies, resource quotas, autoscaling — for the actual workload, not a demo.</p></div>
+          <div class="svc-row"><div class="svc-row-h">Cloud Cost Optimization</div><p>Reserved instance analysis, right-sizing, storage tiering, intelligent autoscaling. Clients typically reduce cloud spend 30–50% after an architecture review.</p></div>
+        </div>
+        <div class="sol-intro reveal rd1">
+          <p>Cloud architecture is not a solved problem. The defaults chosen by cloud providers are optimized for their margin, not your workload. Every IQuro Cloud engagement begins with a forensic analysis of what you're actually running.</p>
+          <p>We have direct experience designing infrastructure on <strong>AWS, Google Cloud, and Azure</strong>, including on-premises OpenShift environments in regulated financial institutions where vendor lock-in is not acceptable.</p>
+          <div class="tech-row"><span class="tech-chip">AWS</span><span class="tech-chip">Google Cloud</span><span class="tech-chip">Azure</span><span class="tech-chip">Terraform</span><span class="tech-chip">Kubernetes</span><span class="tech-chip">OpenShift</span><span class="tech-chip">Helm</span><span class="tech-chip">Istio</span><span class="tech-chip">Prometheus</span><span class="tech-chip">Grafana</span></div>
+          <div class="sol-cta"><a href="contact.html" class="btn btn-primary">Architect My Infrastructure</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sol-block" id="devops">
+    <div class="sol-num">03</div>
+    <div class="sol-inner">
+      <div class="label reveal">Pillar Three</div>
+      <h2 class="sh reveal">DevOps <em>&amp; Security</em></h2>
+      <p class="sp reveal">Automating your delivery so code ships faster, cleaner, and safer. Security is not a sprint at the end — it's a property of the system from the first commit.</p>
+      <div class="sol-grid">
+        <div class="sol-intro reveal">
+          <p>The fastest way to lose a production system is to build a CI/CD pipeline without considering what it's deploying into. We design DevOps pipelines and security controls together — because they are the same problem.</p>
+          <p>Built on <strong>7+ years of pipeline engineering</strong> in regulated banking environments, where a failed deployment isn't a learning opportunity — it's a regulatory incident. That discipline is what every client gets.</p>
+          <div class="tech-row"><span class="tech-chip">GitLab CI</span><span class="tech-chip">GitHub Actions</span><span class="tech-chip">Argo CD</span><span class="tech-chip">SonarQube</span><span class="tech-chip">Nexus</span><span class="tech-chip">Docker</span><span class="tech-chip">Podman</span><span class="tech-chip">Trivy</span><span class="tech-chip">HashiCorp Vault</span><span class="tech-chip">Gitleaks</span></div>
+          <div class="sol-cta"><a href="contact.html" class="btn btn-primary">Automate My Delivery</a></div>
+        </div>
+        <div class="svc-list reveal rd1">
+          <div class="svc-row"><div class="svc-row-h">CI/CD Pipeline Architecture</div><p>Hardened GitLab CI / GitHub Actions pipelines: build, test, scan, containerize, deploy — automated, with gates that prevent bad code reaching production.</p></div>
+          <div class="svc-row"><div class="svc-row-h">Container &amp; Cluster Management</div><p>OpenShift and Kubernetes cluster operations: namespace management, pod autoscaling, rolling deployments, blue-green strategies for true zero-downtime releases.</p></div>
+          <div class="svc-row"><div class="svc-row-h">Supply-Chain Security Scanning</div><p>SonarQube quality gates, Trivy container vulnerability scanning, OWASP dependency checks, secrets detection with Gitleaks — integrated at every pipeline stage.</p></div>
+          <div class="svc-row"><div class="svc-row-h">GitOps with Argo CD</div><p>Declarative, Git-driven deployment pipelines with automated drift detection and rollback. Full audit trail for every change in every environment.</p></div>
+          <div class="svc-row"><div class="svc-row-h">Secrets &amp; Access Management</div><p>HashiCorp Vault integration, RBAC design, least-privilege service accounts, and secrets rotation — across all cloud and on-premises environments.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<section class="sec" style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="sec-inner" style="text-align:center;" class="reveal">
+    <h2 class="sh reveal" style="max-width:560px;margin:0 auto 20px;">Not sure which solution<br>you need?</h2>
+    <p style="font-size:0.97rem;color:var(--text-2);max-width:460px;margin:0 auto 36px;line-height:1.75;font-weight:300;" class="reveal">Start with a free Technical Discovery. We'll map your situation honestly and recommend the right engagement — with no obligation.</p>
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;" class="reveal">
+      <a href="contact.html" class="btn btn-primary btn-lg">Book Free Discovery</a>
+      <a href="pricing.html" class="btn btn-secondary btn-lg">View Pricing</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div><div class="footer-brand-name"><div class="nav-logo-mark" style="width:26px;height:26px;border-radius:6px;"><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="2.5" height="12" rx="1.25" fill="white"/><circle cx="4.25" cy="9" r="1.8" fill="var(--indigo)"/><circle cx="12" cy="9" r="5.5" stroke="white" stroke-width="2"/><line x1="15.5" y1="13" x2="17.5" y2="15.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>IQuro Cloud</div><p class="footer-tagline">Enterprise Cloud Engineering<br>Muscat, Oman · Available Globally</p></div>
+    <div class="footer-nav"><div class="fn-group"><div class="fn-label">Company</div><a href="about.html">About Us</a><a href="about.html#team">Leadership</a></div><div class="fn-group"><div class="fn-label">Solutions</div><a href="solutions.html#engineering">Product Engineering</a><a href="solutions.html#cloud">Cloud Architecture</a><a href="solutions.html#devops">DevOps &amp; Security</a></div><div class="fn-group"><div class="fn-label">Product</div><a href="products.html">Products</a><a href="pricing.html">Pricing</a></div><div class="fn-group"><div class="fn-label">Connect</div><a href="contact.html">Contact</a><a href="https://linkedin.com/in/iftekar-qureshi" target="_blank">LinkedIn</a><a href="https://github.com/iftekarqureshi" target="_blank">GitHub</a></div></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 IQuro Cloud · All rights reserved</span><div class="footer-social"><a href="https://linkedin.com/in/iftekar-qureshi" target="_blank">LinkedIn</a><a href="https://github.com/iftekarqureshi" target="_blank">GitHub</a></div></div>
+</footer>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+<script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Products — IQuro Cloud</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 52px; }
+.prod-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 48px 40px; position: relative; overflow: hidden;
+  transition: background 0.25s, border-color 0.2s;
+}
+.prod-card:hover { background: var(--bg3); border-color: var(--border-md); }
+.prod-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--indigo); opacity:0; transition:opacity 0.3s; }
+.prod-card:hover::before { opacity:1; }
+.prod-status { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.prod-icon { width: 56px; height: 56px; border-radius: 14px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; background: var(--indigo-dim); border: 1px solid rgba(99,102,241,0.2); }
+.prod-icon.cyan { background: var(--cyan-dim); border-color: rgba(34,211,238,0.2); }
+.prod-name { font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 8px; letter-spacing: -0.02em; }
+.prod-tagline { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--indigo); margin-bottom: 16px; }
+.prod-tagline.cyan { color: var(--cyan); }
+.prod-desc { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; margin-bottom: 28px; font-weight: 300; }
+.prod-feats { display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px; }
+.pf2 { display: flex; align-items: flex-start; gap: 9px; font-size: 0.84rem; color: var(--text-2); font-weight: 300; }
+.pf2::before { content:'✓'; color: var(--green); font-size: 0.76rem; flex-shrink: 0; margin-top: 2px; }
+.prod-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* UPCOMING */
+.upcoming-sec { padding: 96px 48px; background: var(--bg1); border-top: 1px solid var(--border); }
+.upcoming-inner { max-width: 1100px; margin: 0 auto; }
+.upcoming-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 48px; }
+.uc { background: var(--bg2); border: 1px solid var(--border); padding: 36px 28px; transition: background 0.2s; }
+.uc:hover { background: var(--bg3); }
+.uc-icon { width: 40px; height: 40px; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: var(--indigo-dim); border: 1px solid rgba(99,102,241,0.2); margin-bottom: 18px; }
+.uc-h { font-size: 0.97rem; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+.uc-p { font-size: 0.84rem; color: var(--text-2); line-height: 1.7; font-weight: 300; }
+
+/* OPEN SOURCE */
+.oss-sec { padding: 96px 48px; background: var(--bg); border-top: 1px solid var(--border); }
+.oss-inner { max-width: 1100px; margin: 0 auto; }
+.oss-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 48px; }
+.oss-card { background: var(--bg2); border: 1px solid var(--border); padding: 28px; transition: border-color 0.2s; }
+.oss-card:hover { border-color: var(--border-md); }
+.oss-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.oss-name { font-size: 0.93rem; font-weight: 600; color: var(--white); }
+.oss-lang { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; border: 1px solid var(--border); color: var(--text-3); }
+.oss-desc { font-size: 0.83rem; color: var(--text-2); line-height: 1.65; font-weight: 300; }
+.oss-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 14px; font-size: 0.8rem; color: var(--indigo); font-weight: 500; transition: gap 0.15s; }
+.oss-link:hover { gap: 9px; }
+.oss-link::after { content: '→'; }
+
+@media(max-width:1024px){ .prod-grid,.upcoming-grid,.oss-grid { grid-template-columns:1fr; } .upcoming-sec,.oss-sec { padding: 72px 28px; } }
+@media(max-width:640px){ .upcoming-sec,.oss-sec { padding: 56px 20px; } }
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="2.5" height="12" rx="1.25" fill="white"/><circle cx="4.25" cy="9" r="1.8" fill="var(--indigo)"/><circle cx="12" cy="9" r="5.5" stroke="white" stroke-width="2"/><line x1="15.5" y1="13" x2="17.5" y2="15.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>IQuro Cloud</a>
+  <ul class="nav-links" id="navLinks"><li><a href="about.html">About</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="products.html">Products</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <div class="nav-right"><a href="contact.html" class="nav-signin">Sign in</a><a href="contact.html" class="btn btn-primary btn-sm">Start a Project</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
+</nav>
+<div class="mobile-nav" id="mobileNav"><button class="mob-close" onclick="closeMob()">✕</button><a href="about.html" onclick="closeMob()">About</a><a href="solutions.html" onclick="closeMob()">Solutions</a><a href="products.html" onclick="closeMob()">Products</a><a href="pricing.html" onclick="closeMob()">Pricing</a><a href="contact.html" onclick="closeMob()">Contact</a><a href="contact.html" class="btn btn-primary mob-btn">Start a Project</a></div>
+
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-crumb">Products</div>
+    <h1 class="page-hero-h">Software we've<br><em>built</em> and <span class="cyan">shipped.</span></h1>
+    <p class="page-hero-p">Beyond client delivery, IQuro Cloud builds and maintains its own products — tools and platforms that solve real engineering problems we've encountered across enterprise engagements.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="sec-inner">
+    <div class="label reveal">Live Products</div>
+    <h2 class="sh reveal">Production-grade tools,<br><em>built by engineers</em> for engineers.</h2>
+    <div class="prod-grid">
+
+      <div class="prod-card reveal">
+        <div class="prod-status"><span class="badge badge-green" style="font-size:0.52rem"><span class="badge-dot badge-dot-green"></span>Live</span></div>
+        <div class="prod-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="var(--indigo)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="prod-name">PipelineKit</div>
+        <div class="prod-tagline">DevOps · CI/CD Automation</div>
+        <p class="prod-desc">A modular GitLab CI / GitHub Actions pipeline scaffolding toolkit. Drop into any project and get a production-hardened pipeline with security scanning, container builds, and multi-environment deployment in under 10 minutes.</p>
+        <div class="prod-feats">
+          <div class="pf2">Pre-built stages: lint, test, build, scan, push, deploy</div>
+          <div class="pf2">SonarQube + Trivy integration out of the box</div>
+          <div class="pf2">Multi-environment strategy (dev / staging / prod)</div>
+          <div class="pf2">Supports GitLab CI, GitHub Actions, and Jenkins</div>
+          <div class="pf2">Kubernetes and OpenShift deployment targets</div>
+        </div>
+        <div class="prod-actions">
+          <a href="contact.html" class="btn btn-primary">Request Access</a>
+          <a href="contact.html" class="btn btn-ghost">Learn More</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal rd1">
+        <div class="prod-status"><span class="badge badge-green" style="font-size:0.52rem"><span class="badge-dot badge-dot-green"></span>Live</span></div>
+        <div class="prod-icon cyan">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999A5.002 5.002 0 003.9 11.99" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="prod-name">CloudBlueprint</div>
+        <div class="prod-tagline cyan">Infrastructure · Terraform Templates</div>
+        <p class="prod-desc">A curated collection of production-ready Terraform modules for AWS, GCP, and Azure. Each module is tested against real enterprise workloads and documented with the architectural decisions that shaped it.</p>
+        <div class="prod-feats">
+          <div class="pf2">Modules: VPC, EKS/GKE/AKS, RDS, Redis, S3, IAM</div>
+          <div class="pf2">Multi-environment variable sets (dev / staging / prod)</div>
+          <div class="pf2">Cost annotations on every resource</div>
+          <div class="pf2">Terratest coverage included</div>
+          <div class="pf2">Maintained against latest provider versions</div>
+        </div>
+        <div class="prod-actions">
+          <a href="contact.html" class="btn btn-primary">Request Access</a>
+          <a href="contact.html" class="btn btn-ghost">Learn More</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal">
+        <div class="prod-status"><span class="badge badge-indigo" style="font-size:0.52rem">Beta</span></div>
+        <div class="prod-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="var(--indigo)" stroke-width="2"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14" stroke="var(--indigo)" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="prod-name">ObserveStack</div>
+        <div class="prod-tagline">Observability · Monitoring</div>
+        <p class="prod-desc">A pre-configured Prometheus + Grafana + Alertmanager stack with battle-tested dashboards for Kubernetes, Node.js, Python, and Java services. Deploy full observability in one Helm chart.</p>
+        <div class="prod-feats">
+          <div class="pf2">Pre-built dashboards: cluster, service, API latency, error rate</div>
+          <div class="pf2">Alert rules tuned for production environments</div>
+          <div class="pf2">Supports Slack, PagerDuty, and email channels</div>
+          <div class="pf2">Distributed tracing with Jaeger integration</div>
+        </div>
+        <div class="prod-actions">
+          <a href="contact.html" class="btn btn-secondary">Join Beta</a>
+          <a href="contact.html" class="btn btn-ghost">Learn More</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal rd1">
+        <div class="prod-status"><span class="badge badge-indigo" style="font-size:0.52rem">Beta</span></div>
+        <div class="prod-icon cyan">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M16 18l6-6-6-6M8 6L2 12l6 6" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="prod-name">AppFrame</div>
+        <div class="prod-tagline cyan">Engineering · Starter Kit</div>
+        <p class="prod-desc">An enterprise-grade Next.js + Node.js application starter. Auth, database migrations, API structure, error handling, logging, and Kubernetes deployment manifests — built in from the start so you ship features, not boilerplate.</p>
+        <div class="prod-feats">
+          <div class="pf2">Next.js 14 + App Router + TypeScript</div>
+          <div class="pf2">Node.js / Fastify API with JWT auth</div>
+          <div class="pf2">PostgreSQL + Prisma ORM with migration system</div>
+          <div class="pf2">Docker Compose + Kubernetes manifests included</div>
+          <div class="pf2">Structured logging, error tracking, health checks</div>
+        </div>
+        <div class="prod-actions">
+          <a href="contact.html" class="btn btn-secondary">Join Beta</a>
+          <a href="contact.html" class="btn btn-ghost">Learn More</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="upcoming-sec">
+  <div class="upcoming-inner">
+    <div class="label reveal">On the Roadmap</div>
+    <h2 class="sh reveal">What's <em>coming next.</em></h2>
+    <div class="upcoming-grid">
+      <div class="uc reveal">
+        <div class="uc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" stroke="var(--indigo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="uc-h">SecureGate</div>
+        <p class="uc-p">An automated RBAC + secrets audit tool for Kubernetes clusters. Detects over-privileged service accounts, exposed secrets, and policy drift — outputs a remediation report.</p>
+      </div>
+      <div class="uc reveal rd1">
+        <div class="uc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h10" stroke="var(--indigo)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div class="uc-h">CostLens</div>
+        <p class="uc-p">A cloud cost visibility platform that maps AWS, GCP, and Azure spend to application teams and deployment namespaces — with right-sizing recommendations based on actual utilization.</p>
+      </div>
+      <div class="uc reveal rd2">
+        <div class="uc-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="var(--indigo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="uc-h">DeployRadar</div>
+        <p class="uc-p">A lightweight deployment health dashboard — tracks every deployment across all environments, surfaces rollback history, and provides Slack-native notifications for deployment events.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="oss-sec">
+  <div class="oss-inner">
+    <div class="label reveal">Open Source</div>
+    <h2 class="sh reveal">Giving back to the<br><em>engineering community.</em></h2>
+    <div class="oss-grid">
+      <div class="oss-card reveal">
+        <div class="oss-head"><div class="oss-name">k8s-namespace-cleaner</div><span class="oss-lang">Go</span></div>
+        <p class="oss-desc">Automated cleanup of stale Kubernetes namespaces and resources based on TTL annotations. Keeps dev clusters tidy without manual intervention.</p>
+        <a href="https://github.com/iftekarqureshi/k8s-namespace-cleaner" target="_blank" class="oss-link">View on GitHub</a>
+      </div>
+      <div class="oss-card reveal rd1">
+        <div class="oss-head"><div class="oss-name">sonar-report-parser</div><span class="oss-lang">Python</span></div>
+        <p class="oss-desc">Parses SonarQube JSON reports and generates human-readable summaries, Slack notifications, and quality gate status badges for CI pipelines.</p>
+        <a href="https://github.com/iftekarqureshi/sonar-report-parser" target="_blank" class="oss-link">View on GitHub</a>
+      </div>
+      <div class="oss-card reveal rd2">
+        <div class="oss-head"><div class="oss-name">terraform-cost-tagger</div><span class="oss-lang">HCL</span></div>
+        <p class="oss-desc">A Terraform module that enforces consistent cost-allocation tagging across all cloud resources — prevents untagged resources from slipping into production.</p>
+        <a href="https://github.com/iftekarqureshi/terraform-cost-tagger" target="_blank" class="oss-link">View on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="sec-inner" style="text-align:center;">
+    <h2 class="sh reveal" style="max-width:520px;margin:0 auto 18px;">Want early access to<br>any of these <em>products?</em></h2>
+    <p style="font-size:0.97rem;color:var(--text-2);max-width:440px;margin:0 auto 36px;line-height:1.75;font-weight:300;" class="reveal">Get in touch and we'll add you to the early access list. All feedback shapes the roadmap directly.</p>
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;" class="reveal">
+      <a href="contact.html" class="btn btn-primary btn-lg">Request Early Access</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-top"><div><div class="footer-brand-name"><div class="nav-logo-mark" style="width:26px;height:26px;border-radius:6px;"><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="2.5" height="12" rx="1.25" fill="white"/><circle cx="4.25" cy="9" r="1.8" fill="var(--indigo)"/><circle cx="12" cy="9" r="5.5" stroke="white" stroke-width="2"/><line x1="15.5" y1="13" x2="17.5" y2="15.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>IQuro Cloud</div><p class="footer-tagline">Enterprise Cloud Engineering<br>Muscat, Oman · Available Globally</p></div><div class="footer-nav"><div class="fn-group"><div class="fn-label">Company</div><a href="about.html">About</a><a href="about.html#team">Leadership</a></div><div class="fn-group"><div class="fn-label">Solutions</div><a href="solutions.html#engineering">Engineering</a><a href="solutions.html#cloud">Cloud</a><a href="solutions.html#devops">DevOps</a></div><div class="fn-group"><div class="fn-label">Product</div><a href="products.html">Products</a><a href="pricing.html">Pricing</a></div><div class="fn-group"><div class="fn-label">Connect</div><a href="contact.html">Contact</a><a href="https://linkedin.com/in/iftekar-qureshi" target="_blank">LinkedIn</a><a href="https://github.com/iftekarqureshi" target="_blank">GitHub</a></div></div></div>
+  <div class="footer-bottom"><span>© 2026 IQuro Cloud · All rights reserved</span><div class="footer-social"><a href="https://linkedin.com/in/iftekar-qureshi" target="_blank">LinkedIn</a><a href="https://github.com/iftekarqureshi" target="_blank">GitHub</a></div></div>
+</footer>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+<script src="shared.js"></script>
+</body>
+</html>

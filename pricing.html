@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pricing — IQuro Cloud</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.pricing-sec { padding: 80px 48px; background: var(--bg); }
+.pricing-inner { max-width: 1100px; margin: 0 auto; }
+
+/* toggle */
+.toggle-row { display: flex; align-items: center; gap: 14px; margin-bottom: 52px; }
+.tgl-lbl { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); transition: color 0.2s; }
+.tgl-lbl.on { color: var(--white); }
+.tgl {
+  width: 44px; height: 24px; border-radius: 100px; background: var(--bg3); border: 1px solid var(--border-md);
+  position: relative; cursor: pointer; transition: background 0.25s; flex-shrink: 0;
+}
+.tgl.active { background: var(--indigo); }
+.tgl::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--white); transition: transform 0.25s; }
+.tgl.active::after { transform: translateX(20px); }
+.save-pill { font-family: var(--mono); font-size: 0.57rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; background: rgba(99,102,241,0.12); color: var(--indigo-hi); border: 1px solid rgba(99,102,241,0.25); border-radius: 100px; }
+
+/* plans */
+.plans-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.plan {
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 44px 36px; position: relative; overflow: hidden;
+  transition: border-color 0.2s;
+}
+.plan:hover { border-color: var(--border-md); }
+.plan.featured {
+  background: var(--bg3); border-color: rgba(99,102,241,0.35);
+  box-shadow: 0 0 0 1px rgba(99,102,241,0.2);
+}
+.plan.featured::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--indigo), var(--cyan));
+  z-index: 2; pointer-events: none;
+}
+.plan-tag { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.plan-name { font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.plan-sub { font-size: 0.84rem; color: var(--text-2); margin-bottom: 28px; line-height: 1.6; font-weight: 300; }
+.plan-price { font-size: 3rem; font-weight: 700; color: var(--white); line-height: 1; letter-spacing: -0.03em; margin-bottom: 4px; }
+.plan-price .cur { font-size: 1.4rem; color: var(--indigo); vertical-align: super; font-weight: 500; }
+.plan-period { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
+.plan-note { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-4); margin-bottom: 32px; }
+.plan-div { height: 1px; background: var(--border); margin-bottom: 28px; }
+.plan-feats { display: flex; flex-direction: column; gap: 11px; margin-bottom: 36px; }
+.pf { display: flex; align-items: flex-start; gap: 10px; font-size: 0.86rem; color: var(--text-2); line-height: 1.5; font-weight: 300; }
+.pf .ck { color: var(--green); flex-shrink: 0; margin-top: 2px; font-size: 0.78rem; }
+.pf .no { color: var(--text-4); flex-shrink: 0; margin-top: 2px; }
+.pf.dim { color: var(--text-3); }
+.plan-cta { width: 100%; text-align: center; justify-content: center; }
+
+/* discovery banner */
+.discovery-banner {
+  margin-top: 36px; padding: 28px 36px; background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.db-text h4 { font-size: 0.93rem; font-weight: 600; color: var(--white); margin-bottom: 5px; }
+.db-text p { font-size: 0.83rem; color: var(--text-2); line-height: 1.6; font-weight: 300; }
+
+/* compare table */
+.compare-sec { padding: 80px 48px; background: var(--bg1); border-top: 1px solid var(--border); }
+.compare-inner { max-width: 1100px; margin: 0 auto; }
+.ctable { width: 100%; border-collapse: collapse; margin-top: 40px; border-radius: 10px; overflow: hidden; }
+.ctable th, .ctable td { padding: 14px 22px; text-align: left; border-bottom: 1px solid var(--border); }
+.ctable thead th { background: var(--bg2); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); }
+.ctable thead th:first-child { color: var(--text-4); }
+.ctable td { font-size: 0.86rem; color: var(--text-2); background: var(--bg); font-weight: 300; }
+.ctable td:first-child { font-weight: 500; color: var(--text-1); }
+.ctable tr:last-child td { border-bottom: none; }
+.ctable tr:hover td { background: var(--bg2); }
+.yes { color: var(--green); }
+.no { color: var(--text-4); }
+
+/* faq */
+.faq-sec { padding: 80px 48px; background: var(--bg); border-top: 1px solid var(--border); }
+.faq-inner { max-width: 760px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q {
+  padding: 22px 0; display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; font-size: 0.95rem; font-weight: 500; color: var(--text-1);
+  gap: 20px; transition: color 0.15s; list-style: none;
+}
+.faq-q:hover { color: var(--indigo); }
+.faq-ico { color: var(--indigo); font-size: 1.1rem; flex-shrink: 0; transition: transform 0.25s; }
+.faq-ico.open { transform: rotate(45deg); }
+.faq-a { font-size: 0.88rem; color: var(--text-2); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.25s; font-weight: 300; }
+.faq-a.open { max-height: 260px; padding-bottom: 22px; }
+
+@media(max-width:1024px){ .pricing-sec, .compare-sec, .faq-sec { padding: 64px 28px; } .plans-grid { grid-template-columns: 1fr; max-width: 500px; } }
+@media(max-width:640px){ .pricing-sec, .compare-sec, .faq-sec { padding: 52px 20px; } .ctable th:nth-child(3),.ctable td:nth-child(3) { display: none; } }
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="2.5" height="12" rx="1.25" fill="white"/><circle cx="4.25" cy="9" r="1.8" fill="var(--indigo)"/><circle cx="12" cy="9" r="5.5" stroke="white" stroke-width="2"/><line x1="15.5" y1="13" x2="17.5" y2="15.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>IQuro Cloud</a>
+  <ul class="nav-links" id="navLinks"><li><a href="about.html">About</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="products.html">Products</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <div class="nav-right"><a href="contact.html" class="nav-signin">Sign in</a><a href="contact.html" class="btn btn-primary btn-sm">Start a Project</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
+</nav>
+<div class="mobile-nav" id="mobileNav"><button class="mob-close" onclick="closeMob()">✕</button><a href="about.html" onclick="closeMob()">About</a><a href="solutions.html" onclick="closeMob()">Solutions</a><a href="products.html" onclick="closeMob()">Products</a><a href="pricing.html" onclick="closeMob()">Pricing</a><a href="contact.html" onclick="closeMob()">Contact</a><a href="contact.html" class="btn btn-primary mob-btn">Start a Project</a></div>
+
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-crumb">Pricing</div>
+    <h1 class="page-hero-h">Transparent.<br><em>Honest.</em><br>No surprises.</h1>
+    <p class="page-hero-p">We price by engagement scope, not by hour. Every project starts with a free Technical Discovery. You'll know the total baseline before we write a single line of code.</p>
+  </div>
+</header>
+
+<section class="pricing-sec" id="plans">
+  <div class="pricing-inner">
+    <div class="label reveal">Engagement Plans</div>
+    <h2 class="sh reveal">Choose your model.</h2>
+    <div class="plans-grid" style="margin-top: 40px;">
+      <div class="plan reveal">
+        <div class="plan-tag"><span class="badge badge-indigo" style="font-size:0.52rem">Starter</span></div>
+        <div class="plan-name">Foundation</div>
+        <div class="plan-sub">For startups and MVPs that need to launch fast without cutting corners.</div>
+        <div class="plan-price" style="font-size:1.8rem; margin-bottom:12px; letter-spacing: -0.01em;">Book a Discovery Call</div>
+        <div class="plan-note">Custom scoped per engagement</div>
+        <div class="plan-div"></div>
+        <ul class="plan-feats">
+          <li class="pf"><span class="ck">✓</span>Full-stack application (up to 10 screens)</li>
+          <li class="pf"><span class="ck">✓</span>React / Next.js frontend</li>
+          <li class="pf"><span class="ck">✓</span>REST API backend</li>
+          <li class="pf"><span class="ck">✓</span>Database design &amp; setup</li>
+          <li class="pf"><span class="ck">✓</span>Single cloud deployment</li>
+          <li class="pf"><span class="ck">✓</span>Basic CI/CD pipeline</li>
+          <li class="pf"><span class="ck">✓</span>30-day post-launch support</li>
+          <li class="pf dim"><span class="no">—</span>Multi-cloud architecture</li>
+          <li class="pf dim"><span class="no">—</span>Security scanning suite</li>
+          <li class="pf dim"><span class="no">—</span>Kubernetes cluster management</li>
+        </ul>
+        <a href="contact.html" class="btn btn-secondary btn-lg plan-cta">Get Started</a>
+      </div>
+
+      <div class="plan featured reveal rd1">
+        <div class="plan-tag"><span class="badge badge-indigo" style="font-size:0.52rem">Most Popular</span></div>
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-sub">For companies that need production-grade infrastructure, not just a working prototype.</div>
+        <div class="plan-price" style="font-size:1.8rem; margin-bottom:12px; letter-spacing: -0.01em;">Book a Discovery Call</div>
+        <div class="plan-note">Custom scoped per engagement</div>
+        <div class="plan-div"></div>
+        <ul class="plan-feats">
+          <li class="pf"><span class="ck">✓</span>Full-stack application (unlimited scope)</li>
+          <li class="pf"><span class="ck">✓</span>Any language backend</li>
+          <li class="pf"><span class="ck">✓</span>GraphQL &amp; REST API architecture</li>
+          <li class="pf"><span class="ck">✓</span>Multi-cloud deployment strategy</li>
+          <li class="pf"><span class="ck">✓</span>Kubernetes cluster setup</li>
+          <li class="pf"><span class="ck">✓</span>Hardened CI/CD pipeline</li>
+          <li class="pf"><span class="ck">✓</span>SonarQube + Trivy security scanning</li>
+          <li class="pf"><span class="ck">✓</span>Infrastructure-as-Code (Terraform)</li>
+          <li class="pf"><span class="ck">✓</span>90-day post-launch support</li>
+          <li class="pf"><span class="ck">✓</span>Full documentation &amp; runbooks</li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary btn-lg plan-cta">Start Enterprise Project</a>
+      </div>
+
+      <div class="plan reveal rd2">
+        <div class="plan-tag"><span class="badge badge-cyan" style="font-size:0.52rem">Custom Scale</span></div>
+        <div class="plan-name">Enterprise Custom</div>
+        <div class="plan-sub">For enterprises requiring complete digital transformation, including legacy migration.</div>
+        <div class="plan-price" style="font-size:1.8rem; margin-bottom:12px; letter-spacing: -0.01em;">Book a Discovery Call</div>
+        <div class="plan-note">Custom scoped per engagement</div>
+        <div class="plan-div"></div>
+        <ul class="plan-feats">
+          <li class="pf"><span class="ck">✓</span>Everything in Enterprise</li>
+          <li class="pf"><span class="ck">✓</span>Legacy system migration</li>
+          <li class="pf"><span class="ck">✓</span>On-premises to cloud migration</li>
+          <li class="pf"><span class="ck">✓</span>OpenShift cluster deployment</li>
+          <li class="pf"><span class="ck">✓</span>Multi-environment GitOps (Argo CD)</li>
+          <li class="pf"><span class="ck">✓</span>RBAC &amp; Vault secrets management</li>
+          <li class="pf"><span class="ck">✓</span>Architecture review board</li>
+          <li class="pf"><span class="ck">✓</span>6-month post-delivery retainer</li>
+          <li class="pf"><span class="ck">✓</span>Executive reporting &amp; compliance docs</li>
+          <li class="pf"><span class="ck">✓</span>Team training &amp; knowledge transfer</li>
+        </ul>
+        <a href="contact.html" class="btn btn-secondary btn-lg plan-cta">Request Custom Scope</a>
+      </div>
+    </div>
+
+    <div class="discovery-banner reveal">
+      <div class="db-text"><h4>Not sure what you need?</h4><p>Start with a free Technical Discovery session. We'll scope the right engagement for your situation — with no obligation to proceed.</p></div>
+      <a href="contact.html" class="btn btn-primary" style="flex-shrink:0;">Book Free Discovery</a>
+    </div>
+  </div>
+</section>
+
+<section class="compare-sec" id="compare">
+  <div class="compare-inner">
+    <div class="label reveal">Feature Comparison</div>
+    <h2 class="sh reveal">What's included<br><em>across all plans.</em></h2>
+    <table class="ctable reveal">
+      <thead><tr><th>Feature</th><th>Foundation</th><th>Enterprise</th><th>Enterprise Custom</th></tr></thead>
+      <tbody>
+        <tr><td>Full-stack development</td><td><span class="yes">✓ Included</span></td><td><span class="yes">✓ Included</span></td><td><span class="yes">✓ Included</span></td></tr>
+        <tr><td>React / Next.js frontend</td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+        <tr><td>Custom backend language</td><td><span class="no">Limited</span></td><td><span class="yes">✓ Any language</span></td><td><span class="yes">✓ Any language</span></td></tr>
+        <tr><td>Cloud deployment</td><td><span class="yes">Single cloud</span></td><td><span class="yes">Multi-cloud</span></td><td><span class="yes">Multi-cloud + On-prem</span></td></tr>
+        <tr><td>Kubernetes / OpenShift</td><td><span class="no">—</span></td><td><span class="yes">✓ Kubernetes</span></td><td><span class="yes">✓ K8s + OpenShift</span></td></tr>
+        <tr><td>CI/CD pipeline</td><td><span class="yes">Basic</span></td><td><span class="yes">Hardened</span></td><td><span class="yes">Enterprise-grade</span></td></tr>
+        <tr><td>Security scanning</td><td><span class="no">—</span></td><td><span class="yes">✓ SonarQube + Trivy</span></td><td><span class="yes">✓ Full suite</span></td></tr>
+        <tr><td>Infrastructure as Code</td><td><span class="no">—</span></td><td><span class="yes">✓ Terraform</span></td><td><span class="yes">✓ Terraform + GitOps</span></td></tr>
+        <tr><td>Secrets management</td><td><span class="no">—</span></td><td><span class="no">—</span></td><td><span class="yes">✓ HashiCorp Vault</span></td></tr>
+        <tr><td>Post-launch support</td><td>30 days</td><td>90 days</td><td>6 months</td></tr>
+        <tr><td>Documentation &amp; runbooks</td><td>Basic</td><td><span class="yes">✓ Full</span></td><td><span class="yes">✓ Enterprise</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="faq-sec" id="faq">
+  <div class="faq-inner">
+    <div class="label reveal">FAQ</div>
+    <h2 class="sh reveal" style="margin-bottom:44px;">Common questions,<br><em>answered honestly.</em></h2>
+    <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">How do you handle project scoping? <span class="faq-ico">+</span></div><div class="faq-a">Every engagement starts with a free Technical Discovery — typically 60–90 minutes — where we map your requirements, existing infrastructure, and business constraints. We produce a detailed technical specification and a fixed-price proposal. You know the total cost before signing anything.</div></div>
+    <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Do you work on existing codebases? <span class="faq-ico">+</span></div><div class="faq-a">Absolutely. Roughly half our engagements involve existing systems — performance issues, deployment problems, legacy modernization. We'll do an honest technical assessment of what exists before recommending any approach.</div></div>
+    <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Can I start small and scale the engagement? <span class="faq-ico">+</span></div><div class="faq-a">Yes. Many clients start with a focused engagement — a cloud architecture review, a CI/CD pipeline build, or an MVP — and expand from there. Every engagement is designed to stand alone and integrate cleanly with whatever comes next.</div></div>
+    <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Do you sign NDAs? <span class="faq-ico">+</span></div><div class="faq-a">Always. Confidentiality of client infrastructure and business logic is standard practice — not an optional add-on. Our current engagement with a major GCC banking institution is conducted entirely under NDA.</div></div>
+    <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">What timezones do you serve? <span class="faq-ico">+</span></div><div class="faq-a">IQuro Cloud operates from Muscat, Oman (GST, UTC+4) and is available for US, EU, and APAC clients with flexible overlap hours. Most communication is async by default — we document everything — with synchronous sessions scheduled around your timezone.</div></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-top"><div><div class="footer-brand-name"><div class="nav-logo-mark" style="width:26px;height:26px;border-radius:6px;"><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="2.5" height="12" rx="1.25" fill="white"/><circle cx="4.25" cy="9" r="1.8" fill="var(--indigo)"/><circle cx="12" cy="9" r="5.5" stroke="white" stroke-width="2"/><line x1="15.5" y1="13" x2="17.5" y2="15.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>IQuro Cloud</div><p class="footer-tagline">Enterprise Cloud Engineering<br>Muscat, Oman · Available Globally</p></div><div class="footer-nav"><div class="fn-group"><div class="fn-label">Company</div><a href="about.html">About</a><a href="about.html#team">Leadership</a></div><div class="fn-group"><div class="fn-label">Solutions</div><a href="solutions.html#engineering">Engineering</a><a href="solutions.html#cloud">Cloud</a><a href="solutions.html#devops">DevOps</a></div><div class="fn-group"><div class="fn-label">Product</div><a href="products.html">Products</a><a href="pricing.html">Pricing</a></div><div class="fn-group"><div class="fn-label">Connect</div><a href="contact.html">Contact</a><a href="https://linkedin.com/in/iftekar-qureshi" target="_blank">LinkedIn</a><a href="https://github.com/iftekarqureshi" target="_blank">GitHub</a></div></div></div>
+  <div class="footer-bottom"><span>© 2026 IQuro Cloud · All rights reserved</span><div class="footer-social"><a href="https://linkedin.com/in/iftekar-qureshi" target="_blank">LinkedIn</a><a href="https://github.com/iftekarqureshi" target="_blank">GitHub</a></div></div>
+</footer>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+<script src="shared.js"></script>
+<script>
+function toggleFaq(el){
+  var ans=el.nextElementSibling, ico=el.querySelector('.faq-ico'), was=ans.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(a=>a.classList.remove('open'));
+  document.querySelectorAll('.faq-ico').forEach(i=>i.classList.remove('open'));
+  if(!was){ ans.classList.add('open'); ico.classList.add('open'); }
+}
+</script>
+</body>
+</html>

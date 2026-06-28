@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contact — IQuro Cloud</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+.contact-meta { display: flex; flex-direction: column; gap: 22px; margin-top: 40px; }
+.cm-l { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--indigo); margin-bottom: 3px; }
+.cm-v { font-size: 0.9rem; color: var(--text-1); font-weight: 400; }
+.cm-v a { color: var(--indigo); }
+
+.avail-row { display: inline-flex; align-items: center; gap: 8px; margin-top: 32px; padding: 8px 16px; background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.2); border-radius: 100px; }
+.av-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 2s infinite; }
+.av-t { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); }
+
+.wa-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 10px 18px; border: 1px solid rgba(52,211,153,0.2); background: rgba(52,211,153,0.05); border-radius: 8px; color: var(--green); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s; }
+.wa-btn:hover { background: rgba(52,211,153,0.1); }
+
+.cform { display: flex; flex-direction: column; gap: 18px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.fg { display: flex; flex-direction: column; gap: 7px; }
+.fl { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); }
+.fi, .fs, .fta {
+  background: var(--bg2); border: 1px solid var(--border);
+  color: var(--text-1); font-family: var(--body); font-size: 0.9rem; font-weight: 300;
+  padding: 12px 15px; border-radius: 8px; outline: none; width: 100%;
+  transition: border-color 0.2s;
+}
+.fi::placeholder, .fta::placeholder { color: var(--text-4); }
+.fi:focus, .fs:focus, .fta:focus { border-color: var(--indigo); }
+.fta { resize: vertical; min-height: 112px; }
+.fs { cursor: pointer; appearance: none; }
+.fs option { background: var(--bg2); }
+.fsbtn {
+  padding: 14px 36px; background: var(--indigo); border: none; color: #fff;
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em;
+  text-transform: uppercase; font-weight: 500; cursor: pointer;
+  border-radius: 8px; align-self: flex-start; margin-top: 4px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.fsbtn:hover { background: var(--indigo-hi); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(99,102,241,0.3); }
+.fnote { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.09em; color: var(--text-4); margin-top: 2px; }
+
+/* process mini */
+.process-mini { padding: 72px 48px; background: var(--bg1); border-top: 1px solid var(--border); }
+.process-inner { max-width: 1100px; margin: 0 auto; }
+.process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 44px; }
+.pstep { background: var(--bg2); border: 1px solid var(--border); padding: 28px 24px; transition: border-color 0.2s; }
+.pstep:hover { border-color: var(--border-md); }
+.pstep-tag { font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-4); padding: 3px 8px; border: 1px solid var(--border); border-radius: 3px; display: inline-block; margin-bottom: 16px; }
+.pstep-h { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+.pstep-p { font-size: 0.82rem; color: var(--text-2); line-height: 1.7; font-weight: 300; }
+
+@media(max-width:1024px){ .contact-layout { grid-template-columns:1fr; gap:48px; } .process-steps { grid-template-columns:1fr 1fr; } .process-mini { padding:64px 28px; } }
+@media(max-width:640px){ .process-steps { grid-template-columns:1fr; } .process-mini { padding:52px 20px; } .form-row { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="index.html" class="nav-logo"><div class="nav-logo-mark"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="2.5" height="12" rx="1.25" fill="white"/><circle cx="4.25" cy="9" r="1.8" fill="var(--indigo)"/><circle cx="12" cy="9" r="5.5" stroke="white" stroke-width="2"/><line x1="15.5" y1="13" x2="17.5" y2="15.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>IQuro Cloud</a>
+  <ul class="nav-links" id="navLinks"><li><a href="about.html">About</a></li><li><a href="solutions.html">Solutions</a></li><li><a href="products.html">Products</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <div class="nav-right"><a href="contact.html" class="nav-signin">Sign in</a><a href="contact.html" class="btn btn-primary btn-sm">Start a Project</a><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button></div>
+</nav>
+<div class="mobile-nav" id="mobileNav"><button class="mob-close" onclick="closeMob()">✕</button><a href="about.html" onclick="closeMob()">About</a><a href="solutions.html" onclick="closeMob()">Solutions</a><a href="products.html" onclick="closeMob()">Products</a><a href="pricing.html" onclick="closeMob()">Pricing</a><a href="contact.html" onclick="closeMob()">Contact</a><a href="contact.html" class="btn btn-primary mob-btn">Start a Project</a></div>
+
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-crumb">Contact</div>
+    <h1 class="page-hero-h">Let's build something<br><em>exceptional.</em></h1>
+    <p class="page-hero-p">Start with a free Technical Discovery. We'll map your requirements, identify the gaps, and give you an honest proposal — no obligation to proceed.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="sec-inner">
+    <div class="contact-layout">
+      <div>
+        <div class="label reveal">Get in Touch</div>
+        <h2 class="sh reveal" style="font-size:clamp(1.6rem,3vw,2.4rem);">Available for select<br><em>new engagements.</em></h2>
+        <p style="font-size:0.93rem;color:var(--text-2);line-height:1.8;font-weight:300;" class="reveal">Ideal for startups, scale-ups, and enterprises that need full-stack development paired with enterprise-grade cloud infrastructure. GCC and global clients welcome.</p>
+        <div class="contact-meta reveal">
+          <div class="cm"><div class="cm-l">Location</div><div class="cm-v">Muscat, Oman — Available Globally</div></div>
+          <div class="cm"><div class="cm-l">Response Time</div><div class="cm-v">Within 24 hours</div></div>
+          <div class="cm"><div class="cm-l">Timezone</div><div class="cm-v">GST (UTC+4) · Flexible for US / EU clients</div></div>
+          <div class="cm"><div class="cm-l">Email</div><div class="cm-v"><a href="mailto:iqurocloud@gmail.com">iqurocloud@gmail.com</a></div></div>
+          <div class="cm"><div class="cm-l">LinkedIn</div><div class="cm-v"><a href="https://linkedin.com/in/iftekar-qureshi" target="_blank">linkedin.com/in/iftekar-qureshi</a></div></div>
+        </div>
+        <a href="https://wa.me/96890000000" target="_blank" class="wa-btn reveal">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--green)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
+        <div class="avail-row reveal"><span class="av-dot"></span><span class="av-t">Currently accepting new projects</span></div>
+      </div>
+      <div class="reveal">
+        <!-- ⚠️  Replace YOUR_FORM_ID with your Formspree form ID from formspree.io (free) -->
+        <form class="cform" id="cForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-row">
+            <div class="fg"><label class="fl">Your Name</label><input type="text" name="name" class="fi" placeholder="Jane Smith" required></div>
+            <div class="fg"><label class="fl">Company</label><input type="text" name="company" class="fi" placeholder="Acme Corp"></div>
+          </div>
+          <div class="fg"><label class="fl">Business Email</label><input type="email" name="email" class="fi" placeholder="jane@company.com" required></div>
+          <div class="fg">
+            <label class="fl">Project Type</label>
+            <select name="project_type" class="fs">
+              <option value="" disabled selected>Select engagement type</option>
+              <option>Full-Stack Web Application (React / Next.js)</option>
+              <option>Cloud Infrastructure Architecture (AWS / GCP / Azure)</option>
+              <option>DevOps Pipeline Setup &amp; Security</option>
+              <option>Technical Consultation &amp; Architecture Review</option>
+              <option>Legacy System Modernization</option>
+              <option>End-to-End Product Build</option>
+              <option>Product Early Access Request</option>
+            </select>
+          </div>
+          <div class="fg"><label class="fl">Project Brief</label><textarea name="message" class="fta" placeholder="Describe your project, current challenges, and what a successful outcome looks like for you…" required></textarea></div>
+          <div class="form-row">
+            <div class="fg">
+              <label class="fl">Budget</label>
+              <select name="budget" class="fs">
+                <option value="" disabled selected>Select range</option>
+                <option>$5,000 – $15,000</option><option>$15,000 – $40,000</option>
+                <option>$40,000 – $100,000</option><option>$100,000+</option>
+                <option>Ongoing Retainer</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label class="fl">Timeline</label>
+              <select name="timeline" class="fs">
+                <option value="" disabled selected>Select timeline</option>
+                <option>ASAP (under 4 weeks)</option><option>1–3 months</option>
+                <option>3–6 months</option><option>6+ months</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="fsbtn" id="fBtn">Send Project Inquiry →</button>
+          <p class="fnote" id="fNote">All inquiries responded to within 24 hours · Confidential, no spam</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process-mini">
+  <div class="process-inner">
+    <div class="label reveal">What Happens Next</div>
+    <h2 class="sh reveal" style="margin-bottom:0;">From inquiry to<br><em>first delivery.</em></h2>
+    <div class="process-steps">
+      <div class="pstep reveal"><div class="pstep-tag">Step 01</div><div class="pstep-h">You Send the Brief</div><p class="pstep-p">Fill in the form above with your project outline, timeline, and budget range. No commitment required.</p></div>
+      <div class="pstep reveal rd1"><div class="pstep-tag">Step 02</div><div class="pstep-h">Technical Discovery</div><p class="pstep-p">A 60-minute session to map your requirements, existing infrastructure, and business constraints. Free, no obligation.</p></div>
+      <div class="pstep reveal rd2"><div class="pstep-tag">Step 03</div><div class="pstep-h">Fixed-Price Proposal</div><p class="pstep-p">A detailed technical specification and fixed-price proposal. You know the total cost before signing anything.</p></div>
+      <div class="pstep reveal rd3"><div class="pstep-tag">Step 04</div><div class="pstep-h">We Build It</div><p class="pstep-p">2-week sprints, weekly syncs, continuous deployment to staging. Full visibility throughout the engagement.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-top"><div><div class="footer-brand-name"><div class="nav-logo-mark" style="width:26px;height:26px;border-radius:6px;"><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="2.5" height="12" rx="1.25" fill="white"/><circle cx="4.25" cy="9" r="1.8" fill="var(--indigo)"/><circle cx="12" cy="9" r="5.5" stroke="white" stroke-width="2"/><line x1="15.5" y1="13" x2="17.5" y2="15.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>IQuro Cloud</div><p class="footer-tagline">Enterprise Cloud Engineering<br>Muscat, Oman · Available Globally<br>iqurocloud@gmail.com</p></div><div class="footer-nav"><div class="fn-group"><div class="fn-label">Company</div><a href="about.html">About</a><a href="about.html#team">Leadership</a></div><div class="fn-group"><div class="fn-label">Solutions</div><a href="solutions.html#engineering">Engineering</a><a href="solutions.html#cloud">Cloud</a><a href="solutions.html#devops">DevOps</a></div><div class="fn-group"><div class="fn-label">Product</div><a href="products.html">Products</a><a href="pricing.html">Pricing</a></div><div class="fn-group"><div class="fn-label">Connect</div><a href="contact.html">Contact</a><a href="https://linkedin.com/in/iftekar-qureshi" target="_blank">LinkedIn</a><a href="https://github.com/iftekarqureshi" target="_blank">GitHub</a></div></div></div>
+  <div class="footer-bottom"><span>© 2026 IQuro Cloud · All rights reserved</span><div class="footer-social"><a href="https://linkedin.com/in/iftekar-qureshi" target="_blank">LinkedIn</a><a href="https://github.com/iftekarqureshi" target="_blank">GitHub</a></div></div>
+</footer>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+<script src="shared.js"></script>
+<script>
+const f=document.getElementById('cForm'),b=document.getElementById('fBtn'),n=document.getElementById('fNote');
+f.addEventListener('submit',async e=>{
+  e.preventDefault(); b.textContent='Sending…'; b.style.opacity='0.6'; b.disabled=true;
+  try {
+    const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}});
+    if(r.ok){ b.textContent='Inquiry Sent ✓'; b.style.background='#059669'; b.style.opacity='1'; n.textContent="You'll hear back within 24 hours."; n.style.color='var(--green)'; f.reset(); }
+    else throw new Error();
+  } catch { b.textContent='Send Project Inquiry →'; b.style.opacity='1'; b.disabled=false; n.textContent='Something went wrong — email iqurocloud@gmail.com directly.'; n.style.color='var(--red)'; }
+});
+</script>
+</body>
+</html>
